@@ -1,0 +1,12 @@
+datasets/creditcard.csv
+
+__pycache__/
+*.pyc
+
+.env
+venv/
+.venv/
+
+uploads/
+
+*.log

@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FraudShield AI | Credit Card Approval</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+
+--bg:#050505;
+--card:#111111;
+--card2:#181818;
+--border:#2B2B2B;
+--text:#FFFFFF;
+--muted:#A1A1AA;
+--success:#22C55E;
+
+}
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+
+}
+
+body{
+
+background:linear-gradient(180deg,#050505,#0f0f0f);
+
+color:white;
+
+padding:30px;
+
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:22px 35px;
+
+background:#111;
+
+border:1px solid #222;
+
+border-radius:22px;
+
+margin-bottom:35px;
+
+box-shadow:0 10px 35px rgba(255,255,255,.03);
+
+}
+
+.logo{
+
+font-size:30px;
+
+font-weight:800;
+
+letter-spacing:1px;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+
+color:#A1A1AA;
+
+margin-left:25px;
+
+transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+color:white;
+
+}
+
+/* ================= HERO ================= */
+
+.hero{
+
+text-align:center;
+
+margin-bottom:45px;
+
+}
+
+.hero h1{
+
+font-size:56px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+color:#A1A1AA;
+
+max-width:700px;
+
+margin:auto;
+
+line-height:1.8;
+
+}
+
+/* ================= STATS ================= */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+margin-bottom:40px;
+
+}
+
+.stat{
+
+background:#111;
+
+border:1px solid #222;
+
+padding:30px;
+
+border-radius:22px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.stat:hover{
+
+transform:translateY(-6px);
+
+border-color:#555;
+
+}
+
+.stat h2{
+
+font-size:38px;
+
+margin-bottom:10px;
+
+}
+
+.stat p{
+
+color:#A1A1AA;
+
+}
+
+/* ================= MAIN CONTAINER ================= */
+
+.container{
+
+max-width:1100px;
+
+margin:auto;
+
+background:#111;
+
+border:1px solid #222;
+
+border-radius:30px;
+
+padding:45px;
+
+box-shadow:0 20px 60px rgba(255,255,255,.04);
+
+}
+
+.container h2{
+
+text-align:center;
+
+font-size:40px;
+
+margin-bottom:10px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#A1A1AA;
+
+margin-bottom:35px;
+
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:22px;
+
+}
+
+label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-size:15px;
+
+font-weight:600;
+
+}
+
+input,
+select{
+
+width:100%;
+
+padding:16px;
+
+background:#1A1A1A;
+
+border:1px solid #333;
+
+border-radius:14px;
+
+color:white;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+input:focus,
+select:focus{
+
+outline:none;
+
+border-color:white;
+
+box-shadow:0 0 12px rgba(255,255,255,.08);
+
+}
+
+.full{
+
+grid-column:1/-1;
+
+}
+.upload-section{
+
+margin-top:30px;
+
+grid-column:1/-1;
+
+}
+
+.upload-box{
+
+background:#181818;
+
+border:2px dashed #444;
+
+border-radius:24px;
+
+padding:45px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.upload-box:hover{
+
+border-color:white;
+
+background:#1E1E1E;
+
+}
+
+.upload-icon{
+
+font-size:60px;
+
+margin-bottom:15px;
+
+}
+
+.upload-box h3{
+
+font-size:26px;
+
+margin-bottom:10px;
+
+}
+
+.upload-box p{
+
+color:#A1A1AA;
+
+margin-bottom:20px;
+
+line-height:1.7;
+
+}
+
+.upload-box input{
+
+display:none;
+
+}
+
+.upload-btn{
+
+display:inline-block;
+
+padding:14px 30px;
+
+background:white;
+
+color:black;
+
+border-radius:12px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.upload-btn:hover{
+
+background:#E5E7EB;
+
+}
+
+/* ================= CREDIT SCORE ================= */
+
+.score-box{
+
+margin-top:35px;
+
+background:#181818;
+
+border:1px solid #222;
+
+padding:25px;
+
+border-radius:22px;
+
+}
+
+.score-box h3{
+
+margin-bottom:15px;
+
+}
+
+.score-bar{
+
+height:14px;
+
+background:#333;
+
+border-radius:30px;
+
+overflow:hidden;
+
+}
+
+.score-fill{
+
+width:75%;
+
+height:100%;
+
+background:linear-gradient(
+90deg,
+#ef4444,
+#facc15,
+#22c55e
+);
+
+}
+
+.score-text{
+
+margin-top:12px;
+
+color:#A1A1AA;
+
+}
+
+/* ================= AI SUMMARY ================= */
+
+.summary{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+.summary-card{
+
+background:#181818;
+
+border:1px solid #222;
+
+border-radius:20px;
+
+padding:25px;
+
+transition:.3s;
+
+}
+
+.summary-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#555;
+
+}
+
+.summary-card h3{
+
+margin-bottom:12px;
+
+font-size:20px;
+
+}
+
+.summary-card p{
+
+color:#A1A1AA;
+
+line-height:1.7;
+
+}
+
+/* ================= SECURITY ================= */
+
+.security{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+}
+
+.security-card{
+
+background:#181818;
+
+border:1px solid #222;
+
+border-radius:20px;
+
+padding:22px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.security-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#555;
+
+}
+
+.security-card h2{
+
+font-size:42px;
+
+margin-bottom:10px;
+
+}
+
+.security-card p{
+
+color:#A1A1AA;
+
+}
+
+/* ================= PROGRESS ================= */
+
+.progress-section{
+
+margin-top:35px;
+
+}
+
+.progress-title{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-bottom:10px;
+
+}
+
+.progress{
+
+height:14px;
+
+background:#222;
+
+border-radius:30px;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+width:80%;
+
+height:100%;
+
+background:white;
+
+}
+
+/* ================= BUTTON ================= */
+
+button{
+
+width:100%;
+
+padding:18px;
+
+margin-top:35px;
+
+background:white;
+
+color:black;
+
+font-size:18px;
+
+font-weight:700;
+
+border:none;
+
+border-radius:15px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#E5E7EB;
+
+transform:translateY(-3px);
+
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.summary{
+
+grid-template-columns:1fr;
+
+}
+
+.security{
+
+grid-template-columns:1fr;
+
+}
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.hero h1{
+
+font-size:40px;
+
+}
+
+.navbar{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.nav-links{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+
+🛡 FraudShield AI
+
+</div>
+
+<div class="nav-links">
+
+<a href="/">Dashboard</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/predict">Fraud Detection</a>
+
+<a href="/approval">Approval</a>
+
+<a href="/upload">Upload CSV</a>
+
+<a href="/about">About</a>
+
+</div>
+
+</div>
+
+<div class="hero">
+
+<h1>Credit Card Approval Portal</h1>
+
+<p>
+
+Secure AI-powered credit card approval system with document verification,
+credit analysis, and intelligent eligibility assessment.
+
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<h2>99.8%</h2>
+
+<p>Approval Engine Accuracy</p>
+
+</div>
+
+<div class="stat">
+
+<h2>2,560+</h2>
+
+<p>Applications Processed</p>
+
+</div>
+
+<div class="stat">
+
+<h2>24×7</h2>
+
+<p>AI Verification Service</p>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<h2>Apply for Credit Card</h2>
+
+<p class="subtitle">
+
+Complete the application below. Our AI system will instantly evaluate your eligibility.
+
+</p>
+
+<form method="POST" enctype="multipart/form-data">
+
+<div class="form-grid">
+    <div>
+
+<label>Full Name</label>
+
+<input
+type="text"
+name="name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<div>
+
+<label>Age</label>
+
+<input
+type="number"
+name="age"
+placeholder="Enter age"
+required>
+
+</div>
+
+<div>
+
+<label>PAN Number</label>
+
+<input
+type="text"
+name="pan"
+maxlength="10"
+placeholder="ABCDE1234F"
+oninput="this.value=this.value.toUpperCase()"
+required>
+
+</div>
+
+<div>
+
+<label>Annual Income (₹)</label>
+
+<input
+type="number"
+name="income"
+placeholder="Annual Income"
+required>
+
+</div>
+
+<div>
+
+<label>Credit Score</label>
+
+<input
+type="number"
+name="score"
+id="score"
+placeholder="300 - 900"
+required>
+
+</div>
+
+<div>
+
+<label>Employment Status</label>
+
+<select name="employment">
+
+<option>Salaried</option>
+<option>Self Employed</option>
+<option>Business</option>
+<option>Student</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Existing Loan</label>
+
+<select name="loan">
+
+<option>No</option>
+<option>Yes</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Requested Credit Limit (₹)</label>
+
+<input
+type="number"
+name="limit"
+placeholder="Credit Limit"
+required>
+
+</div>
+
+<div class="upload-section">
+
+<div class="upload-box">
+
+<div class="upload-icon">
+
+📄
+
+</div>
+
+<h3>
+
+Upload Last 3 Months Bank Statement
+
+</h3>
+
+<p>
+
+Supported Formats: PDF, CSV, XLSX
+
+</p>
+
+<label class="upload-btn">
+
+Choose File
+
+<input
+type="file"
+name="statement"
+id="statement"
+accept=".pdf,.csv,.xlsx,.xls"
+required>
+
+</label>
+
+<br><br>
+
+<p id="filename">
+
+No file selected
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="score-box">
+
+<h3>
+
+Credit Score Strength
+
+</h3>
+
+<div class="score-bar">
+
+<div
+class="score-fill"
+id="scoreFill">
+
+</div>
+
+</div>
+
+<p
+class="score-text"
+id="scoreText">
+
+Waiting for Credit Score...
+
+</p>
+
+</div>
+
+<div class="summary">
+
+<div class="summary-card">
+
+<h3>
+
+🤖 AI Approval Prediction
+
+</h3>
+
+<p>
+
+The FraudShield AI engine analyzes
+income, credit score, employment,
+existing loans and uploaded
+documents before giving a final
+decision.
+
+</p>
+
+</div>
+
+<div class="summary-card">
+
+<h3>
+
+📊 Eligibility
+
+</h3>
+
+<p id="eligibility">
+
+Fill all required information
+to estimate your approval
+probability.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="security">
+
+<div class="security-card">
+
+<h2>
+
+🔒
+
+</h2>
+
+<p>
+
+256-bit Encryption
+
+</p>
+
+</div>
+
+<div class="security-card">
+
+<h2>
+
+🛡
+
+</h2>
+
+<p>
+
+Secure Banking Verification
+
+</p>
+
+</div>
+
+<div class="security-card">
+
+<h2>
+
+🤖
+
+</h2>
+
+<p>
+
+AI Decision Engine
+
+</p>
+
+</div>
+
+</div>
+
+<div class="progress-section">
+
+<div class="progress-title">
+
+<span>
+
+Application Progress
+
+</span>
+
+<span id="progressValue">
+
+80%
+
+</span>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-fill"
+id="progressFill">
+
+</div>
+
+</div>
+
+</div>
+
+<button type="submit">
+
+Submit Credit Card Application
+
+</button>
+
+</form>
+
+<div style="margin-top:40px;text-align:center;color:#777;">
+
+FraudShield AI • Flask • Python • MySQL • Machine Learning
+
+</div>
+
+</div>
+
+<script>
+
+const score=document.getElementById("score");
+
+const scoreFill=document.getElementById("scoreFill");
+
+const scoreText=document.getElementById("scoreText");
+
+const eligibility=document.getElementById("eligibility");
+
+score.addEventListener("input",()=>{
+
+let value=parseInt(score.value)||0;
+
+let percent=Math.min((value/900)*100,100);
+
+scoreFill.style.width=percent+"%";
+
+if(value>=750){
+
+scoreText.innerHTML="Excellent Credit Score";
+
+eligibility.innerHTML="Very High Approval Chance";
+
+}
+
+else if(value>=650){
+
+scoreText.innerHTML="Good Credit Score";
+
+eligibility.innerHTML="Medium Approval Chance";
+
+}
+
+else{
+
+scoreText.innerHTML="Low Credit Score";
+
+eligibility.innerHTML="Approval May Be Rejected";
+
+}
+
+});
+
+document.getElementById("statement").addEventListener("change",function(){
+
+if(this.files.length>0){
+
+document.getElementById("filename").innerHTML=this.files[0].name;
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

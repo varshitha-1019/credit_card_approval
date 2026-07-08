@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FraudShield AI | Fraud Detection</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+
+--bg:#000000;
+--card:#111111;
+--card2:#1A1A1A;
+--border:#2A2A2A;
+--text:#FFFFFF;
+--muted:#A1A1AA;
+
+}
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+
+}
+
+body{
+
+background:#000;
+color:#fff;
+padding:30px;
+
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:#111;
+
+border:1px solid #222;
+
+border-radius:22px;
+
+padding:22px 35px;
+
+margin-bottom:35px;
+
+box-shadow:0 15px 40px rgba(255,255,255,.03);
+
+}
+
+.logo{
+
+font-size:32px;
+font-weight:700;
+letter-spacing:1px;
+
+}
+
+.nav-links a{
+
+text-decoration:none;
+
+color:#A1A1AA;
+
+margin-left:22px;
+
+transition:.3s;
+
+font-weight:500;
+
+}
+
+.nav-links a:hover{
+
+color:white;
+
+}
+
+/* ================= MAIN CARD ================= */
+
+.container{
+
+max-width:1100px;
+
+margin:auto;
+
+background:#111;
+
+border:1px solid #222;
+
+border-radius:30px;
+
+padding:45px;
+
+box-shadow:0 20px 60px rgba(255,255,255,.04);
+
+animation:fadeUp .8s;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+h1{
+
+font-size:48px;
+
+text-align:center;
+
+margin-bottom:12px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#9CA3AF;
+
+font-size:18px;
+
+margin-bottom:40px;
+
+}
+
+/* ================= STATS ================= */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+
+margin-bottom:40px;
+
+}
+
+.stat{
+
+background:#1A1A1A;
+
+border:1px solid #222;
+
+padding:28px;
+
+border-radius:18px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.stat:hover{
+
+transform:translateY(-6px);
+
+border-color:#555;
+
+}
+
+.stat h2{
+
+font-size:34px;
+
+margin-bottom:10px;
+
+}
+
+.stat p{
+
+color:#A1A1AA;
+
+}
+
+/* ================= FORM ================= */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+}
+
+label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:500;
+
+}
+
+input{
+
+width:100%;
+
+padding:16px;
+
+background:#1A1A1A;
+
+border:1px solid #333;
+
+border-radius:14px;
+
+color:white;
+
+font-size:16px;
+
+transition:.3s;
+
+}
+
+input:focus{
+
+outline:none;
+
+border-color:white;
+
+box-shadow:0 0 12px rgba(255,255,255,.15);
+
+}
+
+button{
+
+width:100%;
+
+margin-top:35px;
+
+padding:18px;
+
+background:white;
+
+color:black;
+
+border:none;
+
+border-radius:14px;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+background:#ECECEC;
+
+}
+
+.result{
+
+margin-top:35px;
+
+background:#1A1A1A;
+
+border:1px solid #333;
+
+border-radius:22px;
+
+padding:30px;
+
+animation:fadeUp .6s;
+
+}
+
+.result h2{
+
+text-align:center;
+
+margin-bottom:25px;
+
+font-size:30px;
+
+}
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 0;
+
+border-bottom:1px solid #2A2A2A;
+
+}
+
+.row:last-child{
+
+border-bottom:none;
+
+}
+
+.label{
+
+color:#A1A1AA;
+
+font-size:15px;
+
+}
+
+.value{
+
+font-weight:700;
+
+font-size:16px;
+
+color:white;
+
+}
+
+.info{
+
+margin-top:35px;
+
+background:#1A1A1A;
+
+border:1px solid #222;
+
+border-radius:22px;
+
+padding:30px;
+
+}
+
+.info h3{
+
+margin-bottom:18px;
+
+font-size:28px;
+
+}
+
+.info p{
+
+color:#A1A1AA;
+
+line-height:1.9;
+
+font-size:15px;
+
+}
+
+.features{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+margin-top:35px;
+
+}
+
+.feature{
+
+background:#1A1A1A;
+
+border:1px solid #222;
+
+border-radius:20px;
+
+padding:25px;
+
+transition:.3s;
+
+}
+
+.feature:hover{
+
+transform:translateY(-6px);
+
+border-color:#555;
+
+}
+
+.feature h3{
+
+margin-bottom:12px;
+
+font-size:20px;
+
+}
+
+.feature p{
+
+color:#A1A1AA;
+
+line-height:1.7;
+
+}
+
+.footer{
+
+margin-top:45px;
+
+padding-top:25px;
+
+border-top:1px solid #222;
+
+text-align:center;
+
+color:#777;
+
+font-size:14px;
+
+}
+
+@media(max-width:768px){
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+.navbar{
+
+flex-direction:column;
+
+gap:20px;
+
+}
+
+.nav-links{
+
+display:flex;
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+gap:15px;
+
+}
+
+.nav-links a{
+
+margin-left:0;
+
+}
+
+.container{
+
+padding:25px;
+
+}
+
+h1{
+
+font-size:34px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+<div class="logo">
+
+FraudShield AI
+
+</div>
+
+<div class="nav-links">
+
+<a href="/">Dashboard</a>
+
+<a href="/analytics">Analytics</a>
+
+<a href="/predict">Fraud Detection</a>
+
+<a href="/approval">Approval</a>
+
+<a href="/upload">Upload CSV</a>
+
+<a href="/about">About</a>
+
+</div>
+
+</div>
+
+<div class="container">
+
+<h1>Fraud Detection AI</h1>
+
+<p class="subtitle">
+
+Machine Learning powered credit card fraud detection system
+
+</p>
+
+<div class="stats">
+
+<div class="stat">
+
+<h2>99.81%</h2>
+
+<p>Model Accuracy</p>
+
+</div>
+
+<div class="stat">
+
+<h2>284,807</h2>
+
+<p>Training Records</p>
+
+</div>
+
+<div class="stat">
+
+<h2>Random Forest</h2>
+
+<p>ML Algorithm</p>
+
+</div>
+
+</div>
+
+<form method="POST">
+
+<div class="grid">
+
+<div>
+
+<label>Transaction Time</label>
+
+<input
+type="number"
+step="any"
+name="time"
+placeholder="Example : 406"
+required>
+
+</div>
+
+<div>
+
+<label>Transaction Amount (₹)</label>
+
+<input
+type="number"
+step="0.01"
+name="amount"
+placeholder="Example : 2500"
+required>
+
+</div>
+
+</div>
+
+<button type="submit">
+
+Analyze Transaction
+
+</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result">
+
+<h2>Prediction Result</h2>
+<div class="row">
+
+<span class="label">
+Prediction
+</span>
+
+<span class="value">
+{{ prediction }}
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+Confidence Score
+</span>
+
+<span class="value">
+{{ confidence }}%
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+Machine Learning Model
+</span>
+
+<span class="value">
+Random Forest Classifier
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+Dataset
+</span>
+
+<span class="value">
+creditcard.csv
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+Training Features
+</span>
+
+<span class="value">
+Time, Amount
+</span>
+
+</div>
+
+<div class="row">
+
+<span class="label">
+Fraud Dataset Size
+</span>
+
+<span class="value">
+284,807 Transactions
+</span>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<div class="info">
+
+<h3>About This AI Model</h3>
+
+<p>
+
+FraudShield AI uses a Random Forest Machine Learning model trained on the
+popular Kaggle Credit Card Fraud Detection dataset.
+
+</p>
+
+<br>
+
+<p>
+
+The model analyzes transaction patterns based on Transaction Time and
+Transaction Amount to classify transactions as either fraudulent or normal.
+
+</p>
+
+<br>
+
+<p>
+
+The prediction shown above includes the confidence score generated by the
+machine learning model.
+
+</p>
+
+</div>
+
+<div class="features">
+
+<div class="feature">
+
+<h3>⚡ Fast Prediction</h3>
+
+<p>
+
+Predicts fraud within milliseconds using a pre-trained Random Forest model.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>🛡 Fraud Detection</h3>
+
+<p>
+
+Detects suspicious credit card transactions using machine learning instead of manual rules.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>📊 Dataset</h3>
+
+<p>
+
+Trained using 284,807 real-world credit card transactions from the Kaggle Fraud Detection dataset.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>🤖 AI Powered</h3>
+
+<p>
+
+Powered by Scikit-Learn Random Forest Classifier with saved model deployment using Joblib.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>💾 Backend</h3>
+
+<p>
+
+Developed using Python, Flask and MySQL with a responsive banking dashboard interface.
+
+</p>
+
+</div>
+
+<div class="feature">
+
+<h3>📈 Enterprise Ready</h3>
+
+<p>
+
+Designed to demonstrate how AI can assist banks in identifying potentially fraudulent transactions.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+<h2 style="margin-bottom:10px;color:white;">
+FraudShield AI
+</h2>
+
+<p>
+
+Enterprise Credit Card Fraud Detection Platform
+
+</p>
+
+<br>
+
+<p>
+
+Powered by Flask • Python • Pandas • Scikit-Learn • Random Forest • Machine Learning
+
+</p>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

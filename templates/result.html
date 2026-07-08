@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Application Result</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#000000;
+--card:#111111;
+--card2:#1A1A1A;
+--border:#2A2A2A;
+--text:#FFFFFF;
+--muted:#A1A1AA;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+padding:30px;
+}
+
+.card{
+width:750px;
+background:#111;
+border:1px solid #222;
+border-radius:30px;
+padding:50px;
+text-align:center;
+box-shadow:0 20px 60px rgba(255,255,255,.03);
+animation:fadeUp .8s ease;
+}
+
+.icon{
+font-size:90px;
+margin-bottom:20px;
+}
+
+.approved{
+color:#22C55E;
+}
+
+.rejected{
+color:#EF4444;
+}
+
+h1{
+color:white;
+margin-bottom:15px;
+font-size:42px;
+}
+
+.subtitle{
+color:#A1A1AA;
+margin-bottom:35px;
+}
+
+.info{
+background:#1A1A1A;
+border:1px solid #222;
+border-radius:20px;
+padding:25px;
+text-align:left;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:14px 0;
+border-bottom:1px solid #222;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+color:#A1A1AA;
+}
+
+.value{
+color:white;
+font-weight:600;
+}
+
+.status-approved{
+color:#22C55E;
+font-weight:700;
+}
+
+.status-rejected{
+color:#EF4444;
+font-weight:700;
+}
+
+.btn{
+display:inline-block;
+margin-top:35px;
+padding:16px 35px;
+background:white;
+color:black;
+text-decoration:none;
+font-weight:700;
+border-radius:14px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+background:#E4E4E7;
+}
+
+.badge{
+display:inline-block;
+padding:8px 18px;
+background:#1A1A1A;
+border:1px solid #222;
+border-radius:50px;
+margin-bottom:25px;
+color:#A1A1AA;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="badge">
+FraudShield AI Banking Portal
+</div>
+
+{% if status == "Approved" %}
+
+<div class="icon approved">✓</div>
+
+<h1>Application Approved</h1>
+
+<p class="subtitle">
+Congratulations! Your credit card application has been approved.
+</p>
+
+{% else %}
+
+<div class="icon rejected">✕</div>
+
+<h1>Application Rejected</h1>
+
+<p class="subtitle">
+Unfortunately your application did not meet approval requirements.
+</p>
+
+{% endif %}
+
+<div class="info">
+
+<div class="row">
+<span class="label">Applicant Name</span>
+<span class="value">{{ name }}</span>
+</div>
+
+<div class="row">
+<span class="label">PAN Number</span>
+<span class="value">{{ pan }}</span>
+</div>
+
+<div class="row">
+<span class="label">Credit Score</span>
+<span class="value">{{ score }}</span>
+</div>
+
+<div class="row">
+<span class="label">Annual Income</span>
+<span class="value">₹ {{ income }}</span>
+</div>
+
+<div class="row">
+<span class="label">Bank Statement</span>
+<span class="value">{{ statement_name }}</span>
+</div>
+
+<div class="row">
+<span class="label">Application Status</span>
+
+{% if status == "Approved" %} <span class="status-approved">Approved</span>
+{% else %} <span class="status-rejected">Rejected</span>
+{% endif %}
+
+</div>
+
+</div>
+
+<a href="/" class="btn">
+Return To Dashboard
+</a>
+
+</div>
+
+</body>
+</html>
